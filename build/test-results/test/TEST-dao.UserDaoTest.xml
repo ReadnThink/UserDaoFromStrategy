@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dao.UserDaoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-24T13:30:13" hostname="DESKTOP-PL16QP7" time="0.178">
+<testsuite name="dao.UserDaoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-24T14:30:31" hostname="DESKTOP-PL16QP7" time="0.141">
   <properties/>
-  <testcase name="addAndfindById()" classname="dao.UserDaoTest" time="0.178"/>
+  <testcase name="addAndfindById()" classname="dao.UserDaoTest" time="0.141"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[10월 24, 2022 10:30:13 오후 org.springframework.test.context.support.AbstractTestContextBootstrapper getDefaultTestExecutionListenerClassNames
-정보: Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-10월 24, 2022 10:30:13 오후 org.springframework.test.context.support.AbstractTestContextBootstrapper getTestExecutionListeners
-정보: Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6e0f5f7f, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@2805d709, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@3ee37e5a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2ea41516, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3a44431a, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3c7f66c4, org.springframework.test.context.event.EventPublishingTestExecutionListener@194bcebf]
-]]></system-err>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>
