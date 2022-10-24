@@ -2,109 +2,54 @@ package dao;
 
 import domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDao {
-    DataSource dataSource;
+    private DataSource dataSource;
+    private JdbcContextWith jdbcContextWith;
+
+    private JdbcTemplate jdbcTemplate;
 
     public UserDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void jdbcContext(StatementStrategy stmt){
-        Connection c = null;
-        PreparedStatement ps = null;
-        try {
-            c = dataSource.getConnection();
-            ps = stmt.makeStatement(c);
-            ps.executeUpdate();
-        } catch (SQLException e) {
 
-        } finally {
-            if(ps != null){
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if(c!=null){
-                try {
-                    c.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
-
-    }
     public void deleteAll() throws SQLException {
-        jdbcContext(new DeleteAllStarategy());
+        jdbcTemplate.update("delete from users");
     }
     public void add(User user) throws SQLException {
-        jdbcContext(new AddStarategy(user));
+        this.jdbcTemplate.update("insert into users(id,name,password) values(?,?,?)"
+                ,user.getId(),user.getName(),user.getPassword());
     }
 
     public int getConut() throws SQLException {
-        Connection c = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            c = dataSource.getConnection();
-            ps = c.prepareStatement("select count(*) from users");
-            rs = ps.executeQuery();
-            rs.next();
-            return rs.getInt(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if(rs !=null){
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if(ps!=null){
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if(c!=null){
-                try {
-                    c.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
+        return this.jdbcTemplate.queryForObject("select count(*) from users",Integer.class);
     }
 
+    RowMapper<User> rowMapper = new RowMapper<User>() {
+        @Override
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+             User user = new User(rs.getString("id")
+                        ,rs.getString("name"),rs.getString("password"));
+                return user;
+        }
+    };
 
     public User findById(String id) throws SQLException {
-        Connection c = dataSource.getConnection();
-        PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
-        ps.setString(1, id);
-        ResultSet rs = ps.executeQuery();
-        User user = null;
-        if(rs.next()){
-            user = new User();
-            user.setId(rs.getString(1));
-            user.setName(rs.getString(2));
-            user.setPassword(rs.getString(3));
-        }
-        rs.close();
-        ps.close();
-        c.close();
-
-        if(user == null) throw new EmptyResultDataAccessException(1);
-        return user;
+       String sql = "select * from users where id = ?";
+        return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+    }
+    public List<User> getAll(){
+        String sql = "select * from users order by id";
+        return this.jdbcTemplate.query(sql,rowMapper);
     }
 }
