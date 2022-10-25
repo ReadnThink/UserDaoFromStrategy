@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dao.UserDaoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-24T14:30:31" hostname="DESKTOP-PL16QP7" time="0.141">
+<testsuite name="dao.UserDaoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-25T15:26:14" hostname="DESKTOP-PL16QP7" time="0.174">
   <properties/>
-  <testcase name="addAndfindById()" classname="dao.UserDaoTest" time="0.141"/>
+  <testcase name="addAndfindById()" classname="dao.UserDaoTest" time="0.174"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -10,6 +10,7 @@ public class LocalConnectionMaker implements ConnectionMaker{
     @Override
     public Connection makeConnection() throws SQLException {
         Map<String,String> env = System.getenv();
+        // DB_HOST=jdbc:mysql://localhost:3306/likelion-db;DB_USER=root;DB_PASSWORD= ????????????
         Connection c = DriverManager.getConnection(env.get("DB_HOST"),env.get("DB_USER"),env.get("DB_PASSWORD"));
 
         return c;
